@@ -34,6 +34,22 @@ Al compilar, Astro genera AVIF y WebP de cada foto en varios tamaños. Las fuent
 - Páginas legales (aviso legal, privacidad, cookies), «Cómo llegar» y «Guía de la zona».
 - Revisar las condiciones de uso de los mapas de OpenStreetMap o elegir otro proveedor.
 
-## Publicar
+## Publicar en Coolify (VPS)
 
-Es una web estática: vale cualquier hosting estático gratuito (Netlify, Vercel o Cloudflare Pages), con `npm run build` como comando de compilación y `dist` como carpeta de salida.
+El repositorio incluye `Dockerfile` (compila con Node 24 y sirve con nginx) y `nginx.conf` (caché, compresión, cabeceras de seguridad y página 404).
+
+1. En Coolify: **New Resource → Public/Private Repository**, y elegir `javimateo/Web-casa-zahora`, rama `main`.
+2. **Build Pack:** `Dockerfile`.
+3. **Base Directory:** `/web` (el Dockerfile está dentro de esa carpeta).
+4. **Ports Exposes:** `80`.
+5. **Domains:** el dominio definitivo (p. ej. `https://www.casaoliari.com`). Coolify gestiona el certificado HTTPS.
+6. Opcional: activar **Auto Deploy** para que cada `git push` a `main` vuelva a publicar.
+
+Antes del primer despliegue, poner ese mismo dominio en `site` de `astro.config.mjs`: lo usan la URL canónica, la imagen al compartir en redes y el sitemap.
+
+Para probar la imagen en local (si tienes Docker):
+
+```bash
+docker build -t casa-oliari web
+docker run --rm -p 8080:80 casa-oliari   # http://localhost:8080
+```
