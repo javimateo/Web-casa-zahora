@@ -1,0 +1,340 @@
+/* Casa Oliari · diseño v2 — ver diseno/NOTAS-DISENO.md
+   Concepto: la casa vista a través de un arco encalado. Un solo gesto (el arco); el resto, en silencio. */
+
+:root {
+  --cal: #F7F7F4;
+  --olivo-noche: #2C3120;
+  --olivo: #5E6B3A;
+  --olivo-hover: #4F5A30;
+  --arena: #E6DDCB;
+  --cielo: #D5E0E7;
+  --barro: #A2583C;
+
+  --texto-2: #646A58;      /* secundario sobre cal (5,2:1) */
+  --texto-2b: #555B48;     /* secundario sobre arena / cielo (5,2:1) */
+  --linea: rgba(44, 49, 32, .14);
+
+  --f-title: "Fraunces", Georgia, serif;
+  --f-body: "DM Sans", system-ui, sans-serif;
+
+  /* Escala de cuarta justa (×1,333) */
+  --t-14: 14px; --t-17: 17px; --t-22: 22px; --t-30: 30px;
+  --t-40: clamp(32px, 3.4vw, 40px);
+  --t-54: clamp(38px, 4.2vw, 54px);
+  --t-68: clamp(42px, 5.2vw, 68px);
+
+  --wrap: 1200px;
+  --gutter: clamp(20px, 4vw, 48px);
+  --r-foto: 4px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 88px; -webkit-tap-highlight-color: rgba(94, 107, 58, .18); }
+@media (pointer: fine) { html { overscroll-behavior: none; } }
+
+body {
+  margin: 0;
+  background: var(--cal);
+  color: var(--olivo-noche);
+  font: 380 var(--t-17)/1.65 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+img, video { display: block; max-width: 100%; height: auto; }
+a, button { touch-action: manipulation; }
+a { color: inherit; }
+p { margin: 0 0 1em; max-width: 68ch; }
+
+h1, h2, h3 {
+  font-family: var(--f-title);
+  font-variation-settings: "SOFT" 100, "WONK" 0;
+  font-weight: 340;
+  letter-spacing: -.012em;
+  line-height: 1.12;
+  margin: 0 0 .55em;
+  text-wrap: balance;
+}
+h1 { font-size: var(--t-68); line-height: 1.04; letter-spacing: -.02em; }
+.hero h1 { font-size: clamp(40px, 4.6vw, 64px); line-height: 1.05; }
+h2 { font-size: var(--t-54); }
+h3 { font-size: var(--t-22); font-weight: 420; line-height: 1.3; letter-spacing: 0; }
+b, strong { font-weight: 550; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+section { padding: clamp(80px, 10vw, 144px) 0; }
+.lead { font-size: var(--t-22); line-height: 1.5; color: var(--texto-2); max-width: 34em; }
+.muted { color: var(--texto-2); }
+section > .wrap > .lead { margin-bottom: clamp(36px, 4vw, 56px); }
+.label { display: block; font-weight: 500; font-size: var(--t-14); color: var(--olivo); margin-bottom: 6px; }
+.tbc { color: var(--barro); font-weight: 500; }
+.nowrap { white-space: nowrap; }
+.num { font-variant-numeric: tabular-nums; }
+
+.icon { width: 20px; height: 20px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: 16px; top: -100px; z-index: 100; background: var(--olivo-noche); color: var(--cal); padding: 12px 18px; border-radius: 999px; text-decoration: none; }
+.skip:focus { top: 12px; }
+
+:focus-visible { outline: 2px solid var(--olivo); outline-offset: 3px; }
+
+/* ---------- Botones y enlaces ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 0 28px; border-radius: 999px; border: 1.5px solid transparent;
+  font: 500 16px/1 var(--f-body); text-decoration: none; cursor: pointer;
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.btn-primary { background: var(--olivo); color: #fff; }
+.btn-primary:hover { background: var(--olivo-hover); }
+.btn-ghost { border-color: rgba(44, 49, 32, .35); color: var(--olivo-noche); background: transparent; }
+.btn-ghost:hover { border-color: var(--olivo-noche); background: rgba(44, 49, 32, .05); }
+.text-link { color: var(--olivo); font-weight: 500; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color .2s; }
+.text-link:hover { color: var(--olivo-hover); text-decoration-thickness: 2px; }
+
+/* ---------- Cabecera ---------- */
+.site-header { position: sticky; top: 0; z-index: 50; background: rgba(247, 247, 244, .9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+.site-header.scrolled { border-bottom-color: var(--linea); }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 24px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--f-title); font-variation-settings: "SOFT" 100; font-weight: 400; font-size: 25px; }
+.logo .icon { width: 28px; height: 28px; color: var(--olivo); stroke-width: 1.3; }
+.nav { display: flex; gap: 30px; font-size: 15.5px; }
+.nav a { text-decoration: none; color: var(--texto-2); transition: color .2s; }
+.nav a:hover { color: var(--olivo-noche); }
+.header-actions { display: flex; align-items: center; gap: 20px; }
+.lang { display: flex; gap: 12px; font-size: var(--t-14); }
+.lang a { text-decoration: none; color: var(--texto-2); }
+.lang a:hover { color: var(--olivo-noche); }
+.lang a[aria-current="true"] { color: var(--olivo-noche); font-weight: 550; }
+.header-actions .btn { min-height: 44px; padding: 0 22px; font-size: 15px; }
+
+/* ---------- Portada: el arco ---------- */
+.hero { padding: clamp(24px, 4vw, 48px) 0 clamp(80px, 9vw, 128px); }
+.hero .wrap { display: grid; grid-template-columns: 6fr 5fr; gap: clamp(32px, 5vw, 80px); align-items: end; }
+.hero-text { padding-bottom: clamp(8px, 3vw, 40px); }
+.hero h1 { margin-bottom: 28px; }
+.hero .lead { margin-bottom: 36px; }
+.facts { display: flex; flex-wrap: wrap; gap: 12px 28px; list-style: none; padding: 0; margin: 0 0 40px; font-size: 15.5px; color: var(--texto-2); }
+.facts li { display: inline-flex; align-items: center; gap: 9px; }
+.facts .icon { color: var(--olivo); }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+
+.arch {
+  position: relative; overflow: hidden;
+  border-radius: 999px 999px 0 0;
+  aspect-ratio: 4 / 5; width: 100%; margin: 0;
+  max-height: calc(100vh - 140px);
+  background: var(--arena);
+}
+.arch img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.arch video { width: 100%; height: 100%; object-fit: cover; }
+.media-toggle { position: absolute; right: 16px; bottom: 16px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(247, 247, 244, .92); color: var(--olivo-noche); display: grid; place-items: center; cursor: pointer; transition: background-color .2s; }
+.media-toggle:hover { background: #fff; }
+
+/* La única animación automática: el arco se abre al cargar */
+@media (prefers-reduced-motion: no-preference) {
+  .js .arch { clip-path: inset(100% 0 0 0 round 999px 999px 0 0); }
+  .js .hero-text > * { opacity: 0; transform: translateY(10px); }
+  .loaded .arch { clip-path: inset(0 0 0 0 round 999px 999px 0 0); transition: clip-path 1.4s cubic-bezier(.65, 0, .25, 1); }
+  .loaded .hero-text > * { opacity: 1; transform: none; transition: opacity .9s ease, transform .9s ease; }
+  .loaded .hero-text > :nth-child(2) { transition-delay: .15s; }
+  .loaded .hero-text > :nth-child(3) { transition-delay: .3s; }
+  .loaded .hero-text > :nth-child(4) { transition-delay: .45s; }
+}
+
+/* ---------- La casa ---------- */
+.intro .wrap { display: grid; grid-template-columns: 6fr 5fr; gap: clamp(40px, 7vw, 112px); align-items: center; }
+.intro-media { margin: 0; }
+.intro-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--r-foto); }
+.intro-media figcaption { margin-top: 12px; font-size: var(--t-14); color: var(--texto-2); }
+.intro-text p { color: var(--texto-2); }
+.intro-text .lead { color: var(--olivo-noche); }
+
+/* ---------- Lo mejor de la casa ---------- */
+.highlights { padding-top: 0; }
+.highlights-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; list-style: none; margin: 0; padding: 0; }
+.highlights-grid img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--r-foto); margin-bottom: 18px; }
+.highlights-grid h3 { margin-bottom: 6px; }
+.highlights-grid p { font-size: 15.5px; color: var(--texto-2); margin: 0; }
+
+/* ---------- Galería ---------- */
+#galeria { padding-top: 0; }
+.gallery-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+.gallery-top h2 { margin: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { border: 0; background: transparent; color: var(--texto-2); border-radius: 999px; padding: 10px 16px; font: 450 15px/1 var(--f-body); cursor: pointer; transition: background-color .2s, color .2s; }
+.chip:hover { color: var(--olivo-noche); background: rgba(44, 49, 32, .05); }
+.chip[aria-pressed="true"] { background: var(--olivo-noche); color: var(--cal); }
+.gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 210px; grid-auto-flow: dense; gap: 10px; }
+.gallery-grid button { padding: 0; border: 0; border-radius: var(--r-foto); overflow: hidden; cursor: zoom-in; background: var(--arena); }
+.gallery-grid img { width: 100%; height: 100%; object-fit: cover; transition: opacity .2s; }
+.gallery-grid button:hover img { opacity: .9; }
+.gallery-grid .wide { grid-column: span 2; }
+.gallery-grid .tall { grid-row: span 2; }
+.gallery-grid .big { grid-column: span 2; grid-row: span 2; }
+.gallery-grid button[hidden] { display: none; }
+.gallery-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
+.gallery-foot p { margin: 0; font-size: 15px; color: var(--texto-2); }
+
+/* Visor */
+.lightbox { border: 0; padding: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; background: #1d2015; color: var(--cal); overscroll-behavior: contain; }
+.lightbox::backdrop { background: #1d2015; }
+.lightbox figure { margin: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 64px 88px 28px; gap: 14px; }
+.lightbox img { max-height: calc(100dvh - 130px); width: auto; max-width: 100%; object-fit: contain; border-radius: 2px; }
+.lightbox figcaption { font-size: var(--t-14); color: rgba(247, 247, 244, .75); }
+.lb-btn { position: absolute; width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(247, 247, 244, .3); background: transparent; color: var(--cal); display: grid; place-items: center; cursor: pointer; transition: background-color .2s; }
+.lb-btn:hover { background: rgba(247, 247, 244, .12); }
+.lb-close { top: 16px; right: 16px; }
+.lb-prev { left: 16px; top: 50%; translate: 0 -50%; }
+.lb-next { right: 16px; top: 50%; translate: 0 -50%; }
+
+/* ---------- Equipamiento ---------- */
+.amenities-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 8px; }
+.amenities-grid h3 { margin-bottom: 12px; }
+.amenities-grid ul { list-style: none; margin: 0; padding: 0; color: var(--texto-2); }
+.amenities-grid li { padding: 4px 0; }
+.floors { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 72px; padding-top: 40px; border-top: 1px solid var(--linea); }
+.floors dl { margin: 0; }
+.floors dl > div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--linea); }
+.floors dt { font-weight: 450; }
+.floors dd { margin: 0; color: var(--texto-2); text-align: right; }
+
+/* ---------- Ubicación (banda cielo) ---------- */
+.location { background: var(--cielo); }
+.location .lead { color: var(--texto-2b); }
+.location-grid { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
+.map { height: 540px; border-radius: var(--r-foto); overflow: hidden; background: #e9eef1; position: relative; z-index: 0; isolation: isolate; }
+.map .leaflet-tile-pane { filter: grayscale(1) contrast(.9) brightness(1.06); }
+.distances .label { margin: 28px 0 4px; }
+.distances .label:first-child { margin-top: 0; }
+.distances dl { margin: 0; }
+.distances div { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid rgba(44, 49, 32, .14); }
+.distances dd { margin: 0; color: var(--texto-2b); font-variant-numeric: tabular-nums; }
+.location .note { margin: 28px 0 10px; color: var(--texto-2b); }
+.leaflet-container { font-family: var(--f-body) !important; }
+.map-label { background: var(--cal) !important; border: 0 !important; border-radius: 999px !important; box-shadow: none !important; color: var(--olivo-noche) !important; font: 500 12.5px/1 var(--f-body) !important; padding: 6px 10px !important; }
+.map-label::before { display: none !important; }
+.map-label.home { background: var(--barro) !important; color: #fff !important; }
+
+/* ---------- La zona ---------- */
+.area-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; list-style: none; margin: 0; padding: 0; }
+.area-grid img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--r-foto); margin-bottom: 18px; }
+.area-grid p { color: var(--texto-2); font-size: 15.5px; margin: 0; }
+.area-foot { margin-top: 40px; }
+
+/* ---------- Cuándo venir ---------- */
+.seasons { padding-top: 0; }
+.seasons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.season img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--r-foto); margin-bottom: 20px; }
+.season p { color: var(--texto-2); font-size: 16px; }
+.wind { margin-top: 56px; max-width: 760px; display: flex; gap: 18px; align-items: flex-start; padding-top: 28px; border-top: 1px solid var(--linea); }
+.wind .icon { width: 26px; height: 26px; color: var(--olivo); margin-top: 2px; }
+.wind p { margin: 0; color: var(--texto-2); }
+
+/* ---------- Opiniones (banda arena) ---------- */
+.reviews { background: var(--arena); }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 4vw, 56px); margin: 0; padding: 0; list-style: none; }
+.reviews blockquote { margin: 0 0 18px; font-family: var(--f-title); font-variation-settings: "SOFT" 100; font-weight: 340; font-size: var(--t-22); line-height: 1.45; }
+.reviews cite { font-style: normal; font-size: var(--t-14); color: var(--texto-2b); }
+.reviews-summary { margin-top: 56px; color: var(--texto-2b); }
+.reviews-summary strong { font-family: var(--f-title); font-weight: 340; font-size: var(--t-40); color: var(--olivo-noche); margin-right: 6px; }
+
+/* ---------- Preguntas ---------- */
+.faq .wrap { max-width: 880px; }
+.faq details { border-bottom: 1px solid var(--linea); }
+.faq summary { list-style: none; cursor: pointer; padding: 22px 48px 22px 0; position: relative; font-family: var(--f-title); font-variation-settings: "SOFT" 100; font-weight: 380; font-size: var(--t-22); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after, .faq summary::before { content: ""; position: absolute; right: 6px; top: 50%; width: 16px; height: 1.5px; background: var(--olivo); transition: transform .25s; }
+.faq summary::before { transform: rotate(90deg); }
+.faq details[open] summary::before { transform: rotate(0); }
+.faq details p { color: var(--texto-2); padding: 0 48px 22px 0; margin: 0; }
+
+/* ---------- Reservar (olivo noche) ---------- */
+.book { background: var(--olivo-noche); color: var(--cal); }
+.book .wrap { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(40px, 6vw, 96px); align-items: center; }
+.book h2 { color: var(--cal); }
+.book .lead { color: #C9CDBB; }
+.book .tbc, .site-footer .tbc { color: #E8B9A5; }
+.book-photo { margin: 0; }
+.book-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--r-foto); }
+.direct { margin: 36px 0 44px; }
+.direct .btn { background: var(--cal); color: var(--olivo-noche); min-height: 56px; padding: 0 32px; font-size: 17px; }
+.direct .btn:hover { background: #fff; }
+.direct p { margin: 12px 0 0; font-size: 15px; color: #C9CDBB; }
+.platforms { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(247, 247, 244, .18); }
+.platforms li { border-bottom: 1px solid rgba(247, 247, 244, .18); }
+.platforms a { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; text-decoration: none; transition: color .2s; }
+.platforms a:hover { color: #fff; }
+.platforms a:hover .icon { transform: translate(2px, -2px); }
+.platforms .icon { transition: transform .2s; }
+.platforms .name { font-family: var(--f-title); font-variation-settings: "SOFT" 100; font-weight: 380; font-size: var(--t-22); }
+.platforms .meta { margin-left: auto; margin-right: 12px; font-size: 15px; color: #C9CDBB; }
+.book-note { margin-top: 24px; font-size: 14px; color: #C9CDBB; }
+
+/* ---------- Pie ---------- */
+.site-footer { background: var(--olivo-noche); color: #C9CDBB; padding: 24px 0 40px; font-size: 15px; }
+.footer-inner { border-top: 1px solid rgba(247, 247, 244, .18); padding-top: 56px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+.site-footer .logo { color: var(--cal); margin-bottom: 14px; }
+.site-footer .logo .icon { color: #C9D3A8; }
+.footer-title { font: 500 15px/1.3 var(--f-body); color: var(--cal); margin: 4px 0 14px; letter-spacing: 0; }
+.site-footer ul { list-style: none; margin: 0; padding: 0; }
+.site-footer li { padding: 3px 0; }
+.site-footer a { text-decoration: none; }
+.site-footer a:hover { color: var(--cal); text-decoration: underline; text-underline-offset: 4px; }
+.legal { margin-top: 56px; display: grid; gap: 6px; font-size: 13.5px; }
+
+/* ---------- Flotantes ---------- */
+.wa-float { position: fixed; right: 24px; bottom: 24px; z-index: 40; width: 56px; height: 56px; border-radius: 50%; background: var(--olivo); color: #fff; display: grid; place-items: center; box-shadow: 0 0 0 2px rgba(247, 247, 244, .85); transition: background-color .2s; }
+.wa-float:hover { background: var(--olivo-hover); }
+.wa-float .icon { width: 25px; height: 25px; }
+.mobile-bar { display: none; }
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1080px) {
+  .nav { display: none; }
+  .highlights-grid { grid-template-columns: repeat(2, 1fr); }
+  .amenities-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  .book .wrap { grid-template-columns: 1fr; }
+  .book-photo { display: none; }
+}
+
+/* ---------- Móvil ---------- */
+@media (max-width: 760px) {
+  body { font-size: 16.5px; }
+  .site-header .wrap { height: 64px; }
+  .header-actions .btn { display: none; }
+  .hero { padding-top: 8px; }
+  .hero .wrap { grid-template-columns: 1fr; gap: 32px; }
+  .arch { order: -1; aspect-ratio: 4 / 5; max-height: 70vh; }
+  .hero-ctas { flex-direction: column; }
+  .hero-ctas .btn { width: 100%; }
+  .lead { font-size: 19px; }
+  .intro .wrap, .location-grid, .floors { grid-template-columns: 1fr; }
+  .highlights-grid { gap: 20px 14px; }
+  .highlights-grid p { display: none; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; gap: 6px; }
+  .amenities-grid { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
+  .floors { gap: 0; }
+  .map { height: 360px; }
+  .area-grid, .seasons-grid, .reviews-grid { grid-template-columns: 1fr; }
+  .area-grid { gap: 36px; }
+  .area-grid img { aspect-ratio: 3 / 2; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid > :first-child { grid-column: 1 / -1; }
+  .lightbox figure { padding: 64px 12px 88px; }
+  .lb-prev, .lb-next { top: auto; bottom: 20px; translate: none; }
+  .wa-float { bottom: calc(84px + env(safe-area-inset-bottom)); right: 16px; width: 50px; height: 50px; }
+  .mobile-bar {
+    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
+    align-items: center; justify-content: space-between; gap: 12px;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(247, 247, 244, .96); border-top: 1px solid var(--linea);
+  }
+  .mobile-bar .btn { min-height: 46px; padding: 0 22px; font-size: 15px; }
+  .mobile-bar b { font-family: var(--f-title); font-weight: 400; font-size: 18px; display: block; line-height: 1.2; }
+  .mobile-bar small { color: var(--texto-2); font-size: 13px; }
+  .site-footer { padding-bottom: 110px; }
+}

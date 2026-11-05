@@ -1,0 +1,28 @@
+---
+// Foto responsive (AVIF + WebP) a partir de src/assets/fotos/<src>.jpg
+import { Picture } from 'astro:assets';
+import { foto } from '../lib/fotos';
+interface Props {
+  src: string;
+  alt: string;
+  sizes: string;
+  widths?: number[];
+  priority?: boolean;
+  class?: string;
+}
+const { src, alt, sizes, widths = [480, 800, 1200, 1600], priority = false, class: cls } = Astro.props;
+const img = foto(src);
+const anchos = widths.filter((w) => w <= img.width);
+if (!anchos.includes(Math.min(img.width, widths[widths.length - 1]))) anchos.push(Math.min(img.width, widths[widths.length - 1]));
+---
+<Picture
+  src={img}
+  alt={alt}
+  sizes={sizes}
+  widths={[...new Set(anchos)].sort((a, b) => a - b)}
+  formats={['avif', 'webp']}
+  loading={priority ? 'eager' : 'lazy'}
+  decoding={priority ? 'sync' : 'async'}
+  fetchpriority={priority ? 'high' : 'auto'}
+  class={cls}
+/>

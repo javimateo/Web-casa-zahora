@@ -1,0 +1,35 @@
+---
+import Foto from './Foto.astro';
+import type { Textos } from '../i18n/es';
+interface Props { t: Textos }
+const { t } = Astro.props;
+const i = t.intro;
+const h = t.highlights;
+---
+<section class="intro" id="casa" aria-labelledby="t-casa">
+  <div class="wrap">
+    <figure class="intro-media">
+      <Foto src={i.foto.src} alt={i.foto.alt} sizes="(max-width: 760px) 90vw, 50vw" />
+      <figcaption>{i.foto.pie}</figcaption>
+    </figure>
+    <div class="intro-text">
+      <h2 id="t-casa">{i.titulo}</h2>
+      <p class="lead">{i.lead}</p>
+      {i.parrafos.map((p) => <p>{p}</p>)}
+    </div>
+  </div>
+</section>
+
+<section class="highlights" aria-label={h.label}>
+  <div class="wrap">
+    <ul class="highlights-grid">
+      {h.items.map((it) => (
+        <li>
+          <Foto src={it.foto} alt={it.alt} sizes="(max-width: 760px) 45vw, (max-width: 1080px) 45vw, 22vw" widths={[400, 600, 800]} />
+          <h3>{it.titulo}</h3>
+          <p>{it.texto}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

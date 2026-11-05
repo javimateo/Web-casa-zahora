@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "E:/Proyectos/Casa Oliari/web", "run", "dev", "--", "--host", "127.0.0.1", "--port", "4321"],
+      "port": 4321
+    },
+    {
+      "name": "wireframe",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5173", "--bind", "127.0.0.1", "--directory", "E:/Proyectos/Casa Oliari"],
+      "port": 5173
+    }
+  ]
+}

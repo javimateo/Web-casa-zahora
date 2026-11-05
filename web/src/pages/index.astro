@@ -1,0 +1,28 @@
+---
+import { getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Intro from '../components/Intro.astro';
+import Gallery from '../components/Gallery.astro';
+import Amenities from '../components/Amenities.astro';
+import Location from '../components/Location.astro';
+import Area from '../components/Area.astro';
+import Reviews from '../components/Reviews.astro';
+import Book from '../components/Book.astro';
+import { foto } from '../lib/fotos';
+import { es as t } from '../i18n/es';
+
+// Imagen de espera del vídeo de portada (la fachada): se precarga porque es lo primero que se ve
+const poster = await getImage({ src: foto('hero-casa'), width: 900, format: 'webp', quality: 72 });
+---
+<Base t={t}>
+  <link slot="head" rel="preload" as="image" href={poster.src} fetchpriority="high" />
+  <Hero t={t} poster={poster.src} />
+  <Intro t={t} />
+  <Gallery t={t} />
+  <Amenities t={t} />
+  <Location t={t} />
+  <Area t={t} />
+  <Reviews t={t} />
+  <Book t={t} />
+</Base>

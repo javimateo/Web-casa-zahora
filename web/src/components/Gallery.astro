@@ -1,0 +1,126 @@
+---
+import { getImage } from 'astro:assets';
+import Foto from './Foto.astro';
+import Icon from './Icon.astro';
+import { foto } from '../lib/fotos';
+import type { Textos } from '../i18n/es';
+interface Props { t: Textos }
+const { t } = Astro.props;
+const g = t.galeria;
+
+// Versión grande (1600 px como máximo) de cada foto para el visor
+const items = await Promise.all(
+  g.fotos.map(async (f) => {
+    const src = foto(f.foto);
+    const full = await getImage({ src, width: Math.min(src.width, 1600), format: 'webp', quality: 80 });
+    return { ...f, full: full.src };
+  })
+);
+const sizes = { big: '(max-width: 760px) 92vw, 50vw', wide: '(max-width: 760px) 92vw, 50vw', tall: '(max-width: 760px) 46vw, 25vw', '': '(max-width: 760px) 46vw, 25vw' };
+---
+<section id="galeria" aria-labelledby="t-fotos">
+  <div class="wrap">
+    <div class="gallery-top">
+      <h2 id="t-fotos">{g.titulo}</h2>
+      <div class="chips" role="group" aria-label={g.filtrosLabel}>
+        {g.filtros.map((f, i) => (
+          <button class="chip" type="button" data-filter={f.id} aria-pressed={i === 0 ? 'true' : 'false'}>{f.label}</button>
+        ))}
+      </div>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      {items.map((f) => (
+        <button type="button" class={f.forma || undefined} data-cat={f.cat} data-full={f.full} data-extra={f.extra ? '' : undefined}>
+          <Foto src={f.foto} alt={f.alt} sizes={sizes[(f.forma ?? '') as keyof typeof sizes]} widths={[400, 800, 1200]} />
+        </button>
+      ))}
+    </div>
+    <div class="gallery-foot">
+      <p>{g.nota}</p>
+      <button class="btn btn-ghost" type="button" id="showAll">{g.verTodas.replace('{n}', String(items.length))}</button>
+    </div>
+  </div>
+</section>
+
+<dialog class="lightbox" id="lightbox" aria-label={t.ui.visor} data-de={t.ui.de}>
+  <figure><img id="lbImg" alt="" /><figcaption id="lbCap" aria-live="polite"></figcaption></figure>
+  <button class="lb-btn lb-close" type="button" id="lbClose" aria-label={t.ui.cerrar}><Icon name="close" /></button>
+  <button class="lb-btn lb-prev" type="button" id="lbPrev" aria-label={t.ui.anterior}><Icon name="left" /></button>
+  <button class="lb-btn lb-next" type="button" id="lbNext" aria-label={t.ui.siguiente}><Icon name="right" /></button>
+</dialog>
+
+<script>
+  const grid = document.getElementById('galleryGrid')!;
+  const items = [...grid.querySelectorAll<HTMLButtonElement>('button')];
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('.chip')];
+  const showAllBtn = document.getElementById('showAll') as HTMLButtonElement;
+  const params = new URLSearchParams(location.search);
+  let filter = chips.some((c) => c.dataset.filter === params.get('fotos')) ? params.get('fotos')! : 'todo';
+  let expanded = false;
+
+  const inFilter = (b: HTMLButtonElement) => filter === 'todo' || b.dataset.cat === filter;
+  const applyFilter = () => {
+    items.forEach((b) => {
+      b.hidden = !inFilter(b) || (filter === 'todo' && !expanded && b.hasAttribute('data-extra'));
+    });
+    chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.filter === filter)));
+    showAllBtn.hidden = filter !== 'todo' || expanded;
+  };
+  chips.forEach((c) => c.addEventListener('click', () => {
+    filter = c.dataset.filter!;
+    const url = new URL(location.href);
+    if (filter === 'todo') url.searchParams.delete('fotos'); else url.searchParams.set('fotos', filter);
+    history.replaceState(null, '', url);
+    applyFilter();
+  }));
+  showAllBtn.addEventListener('click', () => {
+    expanded = true;
+    applyFilter();
+    items.find((b) => b.hasAttribute('data-extra'))?.focus();
+  });
+  applyFilter();
+
+  // Visor
+  const lb = document.getElementById('lightbox') as HTMLDialogElement;
+  const lbImg = document.getElementById('lbImg') as HTMLImageElement;
+  const lbCap = document.getElementById('lbCap')!;
+  const de = lb.dataset.de ?? 'de';
+  let current: HTMLButtonElement[] = [];
+  let index = 0;
+  let opener: HTMLButtonElement | null = null;
+  const show = (i: number) => {
+    index = (i + current.length) % current.length;
+    const b = current[index];
+    const alt = b.querySelector('img')?.alt ?? '';
+    lbImg.src = b.dataset.full!;
+    lbImg.alt = alt;
+    lbCap.textContent = `${alt} (${index + 1} ${de} ${current.length})`;
+  };
+  items.forEach((b) => b.addEventListener('click', () => {
+    current = items.filter(inFilter);
+    opener = b;
+    lb.showModal();
+    show(current.indexOf(b));
+  }));
+  lb.addEventListener('close', () => opener?.focus());
+  document.getElementById('lbClose')!.addEventListener('click', () => lb.close());
+  document.getElementById('lbPrev')!.addEventListener('click', () => show(index - 1));
+  document.getElementById('lbNext')!.addEventListener('click', () => show(index + 1));
+  lb.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') show(index - 1);
+    if (e.key === 'ArrowRight') show(index + 1);
+  });
+  lb.addEventListener('click', (e) => {
+    const el = e.target as HTMLElement;
+    if (el === lb || el.tagName === 'FIGURE') lb.close();
+  });
+  let touchX: number | null = null;
+  lb.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1));
+    touchX = null;
+  });
+</script>

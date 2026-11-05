@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wireframe · Home · Casa Oliari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,0..100&family=DM+Sans:opsz,wght@9..40,300..600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fafafa; --ink:#222; --mute:#777; --line:#bdbdbd; --box:#e6e6e6; --box2:#d4d4d4;
+    --note:#fff6c9; --noteInk:#6b5a00; --cta:#444;
+    --f-title:"Fraunces",Georgia,serif; --f-body:"DM Sans",system-ui,sans-serif;
+    --w-title:350; --fvs-title:"SOFT" 100, "WONK" 0; --ls-title:-.01em;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:300 16px/1.65 var(--f-body);color:var(--ink);background:var(--bg)}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  section{padding:56px 0;border-bottom:1px dashed var(--line);position:relative;scroll-margin-top:64px}
+  h1,h2,h3{font-family:var(--f-title);font-weight:var(--w-title);font-variation-settings:var(--fvs-title);letter-spacing:var(--ls-title);line-height:1.15;margin:0 0 12px}
+  h3{font-size:20px}
+  b,strong,.btn,summary{font-weight:500}
+  h2{font-size:34px}
+  p{margin:0 0 12px}
+  .tag{display:inline-block;font:500 11px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
+  .ph{background:var(--box);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:13px;text-align:center;padding:8px;position:relative;overflow:hidden}
+  .ph::before,.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent calc(50% - .5px),var(--line) 50%,transparent calc(50% + .5px))}
+  .ph::after{background:linear-gradient(to top left,transparent calc(50% - .5px),var(--line) 50%,transparent calc(50% + .5px))}
+  .ph span{position:relative;z-index:1;background:var(--box);padding:2px 6px}
+  .line{height:10px;background:var(--box2);border-radius:3px;margin:8px 0}
+  .line.s{width:60%} .line.m{width:80%}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border:2px solid var(--cta);background:var(--cta);color:#fff;font-weight:600;border-radius:6px;text-decoration:none;font-size:14px}
+  .btn.ghost{background:transparent;color:var(--cta)}
+  .note{background:var(--note);color:var(--noteInk);border-left:4px solid #e0c200;padding:10px 12px;font-size:13px;margin:16px 0 0;border-radius:4px}
+  .note b{color:#4a3e00}
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  .card{border:1px solid var(--line);background:#fff;border-radius:8px;padding:16px}
+  .icon{width:36px;height:36px;border-radius:50%;background:var(--box2);margin-bottom:10px}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+  .logo{font-family:var(--f-title);font-variation-settings:var(--fvs-title);font-size:22px;font-weight:var(--w-title);letter-spacing:.01em}
+  nav{display:flex;gap:20px;font-size:14px;color:var(--mute)}
+  .lang{font-size:13px;color:var(--mute);border:1px solid var(--line);padding:4px 8px;border-radius:4px}
+  .hdr-right{display:flex;align-items:center;gap:12px}
+
+  /* Hero */
+  .hero{padding:0;border:0}
+  .hero .ph{height:min(82vh,720px);border-left:0;border-right:0;align-items:flex-start;padding-top:32px}
+  .hero-over{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 56px}
+  .hero-over .wrap{width:100%}
+  .hero-box{background:rgba(255,255,255,.92);border:1px solid var(--line);max-width:560px;padding:24px;border-radius:8px}
+  .hero-box h1{font-size:42px;line-height:1.1}
+  .facts{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0 18px;font-size:14px;color:var(--mute)}
+  .facts span::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--box2);margin-right:8px;vertical-align:middle}
+
+  /* Gallery */
+  .gal{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:180px 180px;gap:8px}
+  .gal .ph:first-child{grid-row:span 2}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .chip{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;background:#fff}
+  .chip.on{background:var(--cta);color:#fff;border-color:var(--cta)}
+
+  /* Amenities */
+  .amen{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .amen ul{list-style:none;padding:0;margin:0;font-size:14px;color:var(--mute)}
+  .amen li::before{content:"";display:inline-block;width:12px;height:1px;background:var(--line);margin-right:10px;vertical-align:middle}
+
+  /* Location */
+  .loc{display:grid;grid-template-columns:3fr 2fr;gap:24px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  td{padding:8px 0;border-bottom:1px solid var(--box)}
+  td:last-child{text-align:right;color:var(--mute)}
+
+  /* Seasons */
+  .season .ph{height:140px;margin-bottom:12px}
+
+  /* Reviews */
+  .stars{color:var(--mute)}
+  /* FAQ */
+  details{border-bottom:1px solid var(--line);padding:14px 0}
+  summary{cursor:pointer;font-weight:600}
+
+  /* Book */
+  .book{background:#efefef}
+  .channels{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+  .channel{background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:10px}
+  .channel.primary{border:2px solid var(--cta)}
+  .logo-ph{height:28px;width:90px;background:var(--box2);border-radius:4px}
+
+  footer{padding:40px 0 100px;font-size:13px;color:var(--mute)}
+  footer .grid{grid-template-columns:2fr 1fr 1fr}
+  .reg{border:1px dashed var(--mute);padding:8px 10px;border-radius:4px;display:inline-block;margin-top:8px}
+
+  /* Floating */
+  .wa{position:fixed;right:20px;bottom:20px;width:56px;height:56px;border-radius:50%;background:var(--box2);border:2px solid var(--cta);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;z-index:30}
+  .mbar{display:none}
+
+  /* Legend toggle */
+  .legend{position:fixed;left:20px;bottom:20px;z-index:40;background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:400 12px/1.4 system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .legend select{font:inherit;margin-left:4px}
+  body.hide-notes .note{display:none}
+  .tbc{color:#a08400;font-size:.8em;font-weight:500;margin-left:2px}
+  .grp td{padding-top:18px;font:500 11px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);border-bottom:0}
+
+  /* Mobile */
+  @media (max-width:760px){
+    nav,.hdr-right .btn{display:none}
+    .hero .ph{height:78vh}
+    .hero-over{padding-bottom:24px}
+    .hero-box h1{font-size:32px}
+    .g2,.g3,.g4,.amen,.loc,.channels,footer .grid{grid-template-columns:1fr}
+    .g4.keep2{grid-template-columns:1fr 1fr}
+    .gal{grid-template-columns:1fr 1fr;grid-template-rows:200px 120px}
+    .gal .ph:first-child{grid-column:span 2;grid-row:auto}
+    .gal .ph:nth-child(n+4){display:none}
+    .amen .col+.col{display:none}
+    .amen .more{display:block!important}
+    section{padding:40px 0}
+    h2{font-size:28px}
+    .wa{bottom:84px;right:16px;width:48px;height:48px}
+    .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:1px solid var(--line);padding:10px 16px;gap:10px;align-items:center;justify-content:space-between}
+    .mbar .btn{flex:1}
+    .legend{bottom:84px;left:16px}
+  }
+</style>
+</head>
+<body>
+
+<div class="legend">
+  <label><input type="checkbox" id="tg" checked> Mostrar notas</label>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap">
+    <div class="logo">Casa Oliari</div>
+    <nav><a>La casa</a><a>Galería</a><a>Ubicación</a><a>La zona</a><a>Opiniones</a><a>FAQ</a></nav>
+    <div class="hdr-right">
+      <span class="lang">ES ▾</span>
+      <a class="btn" href="#reservar">Ver disponibilidad</a>
+    </div>
+  </div>
+</header>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="ph"><span>FOTO / VÍDEO EN BUCLE 15–30 s · jardín con la casa o atardecer en el faro de Trafalgar</span></div>
+  <div class="hero-over">
+    <div class="wrap">
+      <div class="hero-box">
+        <div class="tag">Zahora · Cabo de Trafalgar · Cádiz</div>
+        <h1>Tu casa con jardín a un paseo de las playas salvajes de Zahora</h1>
+        <div class="facts"><span>4–5 huéspedes<span class="tbc">*</span></span><span>2 dormitorios</span><span>2 baños<span class="tbc">*</span></span><span>Jardín vallado</span><span>Playa a 15 min a pie</span></div>
+        <a class="btn" href="#reservar">Ver disponibilidad</a>
+        <a class="btn ghost" href="#galeria">Ver fotos</a>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="wrap"><div class="note"><b>Hero.</b> Lo primero que se ve: imagen emocional, la promesa y los datos clave. El CTA lleva al bloque «Reservar», no a una plataforma, para que el visitante elija canal. Los datos marcados con * están por confirmar.</div></div>
+
+<!-- 2. LA CASA -->
+<section id="casa">
+  <div class="wrap">
+    <div class="grid g2" style="align-items:center;gap:40px">
+      <div>
+        <div class="tag">La casa</div>
+        <h2>Una casa para bajar el ritmo</h2>
+        <div class="line"></div><div class="line m"></div><div class="line"></div><div class="line s"></div>
+        <p style="color:var(--mute);font-size:13px;margin-top:12px">Texto de 60–90 palabras: sensaciones, para quién es y la historia del nombre «Oliari».</p>
+      </div>
+      <div class="ph" style="height:340px"><span>Foto vertical · terraza cubierta con la mesa puesta</span></div>
+    </div>
+    <div class="grid g4 keep2" style="margin-top:32px">
+      <div class="card"><div class="icon"></div><h3>Jardín vallado</h3><div class="line m"></div></div>
+      <div class="card"><div class="icon"></div><h3>Chimenea</h3><div class="line m"></div></div>
+      <div class="card"><div class="icon"></div><h3>Terraza y barbacoa</h3><div class="line m"></div></div>
+      <div class="card"><div class="icon"></div><h3>Playa a pie</h3><div class="line m"></div></div>
+    </div>
+    <div class="note"><b>Puntos fuertes.</b> Son los 4 pilares del mensaje. En móvil se ven en una cuadrícula de 2×2.</div>
+  </div>
+</section>
+
+<!-- 3. GALERÍA -->
+<section id="galeria">
+  <div class="wrap">
+    <div class="tag">Galería</div>
+    <h2>Rincón a rincón</h2>
+    <div class="chips"><span class="chip on">Todo</span><span class="chip">Exterior</span><span class="chip">Salón</span><span class="chip">Cocina</span><span class="chip">Dormitorios</span><span class="chip">Baños</span><span class="chip">Entorno</span></div>
+    <div class="gal">
+      <div class="ph"><span>Foto principal</span></div>
+      <div class="ph"><span>Salón + chimenea</span></div>
+      <div class="ph"><span>Cocina</span></div>
+      <div class="ph"><span>Dormitorio</span></div>
+      <div class="ph"><span>Ver todas las fotos →</span></div>
+    </div>
+    <div class="note"><b>Galería.</b> Mosaico y visor a pantalla completa al tocar una foto (con swipe en móvil). Filtros por espacio. Es la sección más importante después del hero.</div>
+  </div>
+</section>
+
+<!-- 4. EQUIPAMIENTO + DISTRIBUCIÓN -->
+<section id="equipamiento">
+  <div class="wrap">
+    <div class="tag">Equipamiento</div>
+    <h2>Todo lo que necesitas</h2>
+    <div class="amen">
+      <div class="col"><h3>Cocina</h3><ul><li>Horno</li><li>Lavavajillas<span class="tbc">*</span></li><li>Cafetera</li><li>Menaje completo</li></ul></div>
+      <div class="col"><h3>Confort</h3><ul><li>Aire acondicionado</li><li>Chimenea</li><li>Wi-Fi XX Mb<span class="tbc">*</span></li><li>Ropa de cama</li></ul></div>
+      <div class="col"><h3>Exterior</h3><ul><li>Jardín vallado</li><li>Terraza cubierta</li><li>Barbacoa</li><li>Parking<span class="tbc">*</span></li></ul></div>
+      <div class="col"><h3>Familias</h3><ul><li>Cuna<span class="tbc">*</span></li><li>Trona<span class="tbc">*</span></li><li>Mascotas<span class="tbc">*</span></li></ul></div>
+      <a class="btn ghost more" style="display:none">Ver todo el equipamiento</a>
+    </div>
+    <div class="grid g2" style="margin-top:36px;gap:24px">
+      <div class="card"><h3>Planta baja</h3><div class="ph" style="height:150px;margin:8px 0"><span>Esquema de la planta</span></div><p style="font-size:14px;color:var(--mute)">Salón con chimenea · Cocina-comedor · Aseo con ducha</p></div>
+      <div class="card"><h3>Planta alta</h3><div class="ph" style="height:150px;margin:8px 0"><span>Esquema de la planta</span></div><p style="font-size:14px;color:var(--mute)">Dormitorio 1: cama doble<span class="tbc">*</span> · Dormitorio 2: 2 individuales<span class="tbc">*</span> · Baño completo</p></div>
+    </div>
+    <div class="note"><b>Equipamiento.</b> En móvil se muestra solo el primer grupo y un botón «Ver todo» que abre un panel. La distribución resuelve la pregunta más frecuente: ¿quién duerme dónde?</div>
+  </div>
+</section>
+
+<!-- 5. UBICACIÓN -->
+<section id="ubicacion">
+  <div class="wrap">
+    <div class="tag">Ubicación</div>
+    <h2>Entre pinares y el Atlántico</h2>
+    <div class="loc">
+      <div class="ph" style="height:380px"><span>MAPA (Leaflet + OpenStreetMap) · casa en zona aproximada + puntos: playas, faro, Caños, Vejer</span></div>
+      <div>
+        <table>
+          <tr class="grp"><td colspan="2">A pie</td></tr>
+          <tr><td>Playa de La Mangueta</td><td>15 min</td></tr>
+          <tr><td>Playa de Zahora</td><td>XX min<span class="tbc">*</span></td></tr>
+          <tr class="grp"><td colspan="2">En coche</td></tr>
+          <tr><td>Faro de Trafalgar</td><td>5 min</td></tr>
+          <tr><td>Los Caños de Meca</td><td>5 min</td></tr>
+          <tr><td>El Palmar</td><td>10–15 min</td></tr>
+          <tr><td>Barbate</td><td>15 min</td></tr>
+          <tr><td>Vejer de la Frontera</td><td>20 min</td></tr>
+          <tr class="grp"><td colspan="2">Aeropuertos</td></tr>
+          <tr><td>Jerez</td><td>1 h 10 min</td></tr>
+          <tr><td>Sevilla</td><td>2 h</td></tr>
+        </table>
+        <p style="margin-top:14px;font-size:14px;color:var(--mute)">Recomendamos venir en coche.</p>
+        <a class="btn ghost">Cómo llegar →</a>
+      </div>
+    </div>
+    <div class="note"><b>Ubicación.</b> El mapa no carga cookies de Google. La ubicación exacta queda a decisión del propietario. El enlace lleva a la página «Cómo llegar».</div>
+  </div>
+</section>
+
+<!-- 6. LA ZONA -->
+<section id="zona">
+  <div class="wrap">
+    <div class="tag">La zona</div>
+    <h2>Qué hacer cerca de Casa Oliari</h2>
+    <div class="grid g4">
+      <div class="card"><div class="ph" style="height:140px;margin-bottom:12px"><span>Playas</span></div><h3>Playas salvajes</h3><div class="line m"></div></div>
+      <div class="card"><div class="ph" style="height:140px;margin-bottom:12px"><span>Breña</span></div><h3>Naturaleza</h3><div class="line m"></div></div>
+      <div class="card"><div class="ph" style="height:140px;margin-bottom:12px"><span>Vejer</span></div><h3>Pueblos blancos</h3><div class="line m"></div></div>
+      <div class="card"><div class="ph" style="height:140px;margin-bottom:12px"><span>Atún</span></div><h3>Gastronomía</h3><div class="line m"></div></div>
+    </div>
+    <p style="margin-top:20px"><a class="btn ghost">Guía completa de Zahora →</a></p>
+    <div class="note"><b>La zona.</b> En móvil, las tarjetas van en un carrusel horizontal. Llevan a /guia-zahora, la página que más ayuda en Google.</div>
+  </div>
+</section>
+
+<!-- 7. CUÁNDO VENIR -->
+<section id="temporadas">
+  <div class="wrap">
+    <div class="tag">Cuándo venir</div>
+    <h2>Zahora, todo el año</h2>
+    <div class="grid g3">
+      <div class="season"><div class="ph"><span>Verano</span></div><h3>Julio y agosto</h3><div class="line"></div><div class="line s"></div></div>
+      <div class="season"><div class="ph"><span>Primavera / otoño</span></div><h3>Mayo, junio, sept. y oct.</h3><div class="line"></div><div class="line s"></div></div>
+      <div class="season"><div class="ph"><span>Invierno + chimenea</span></div><h3>Noviembre a abril</h3><div class="line"></div><div class="line s"></div></div>
+    </div>
+    <div class="note"><b>Temporadas.</b> Vende la temporada media y la baja. Aquí va también una línea honesta sobre el viento de levante. Opcional: un precio «desde» por temporada.</div>
+  </div>
+</section>
+
+<!-- 8. OPINIONES -->
+<section id="opiniones">
+  <div class="wrap">
+    <div class="tag">Opiniones</div>
+    <h2>Huéspedes que repiten</h2>
+    <p class="stars">Nota media X,X / 5 · XX opiniones en Vrbo<span class="tbc">*</span></p>
+    <div class="grid g3">
+      <div class="card"><div class="line"></div><div class="line"></div><div class="line s"></div><p style="font-size:13px;color:var(--mute);margin-top:10px">— Familia, Alemania · Agosto</p></div>
+      <div class="card"><div class="line"></div><div class="line m"></div><div class="line s"></div><p style="font-size:13px;color:var(--mute);margin-top:10px">— Pareja, Madrid · Octubre</p></div>
+      <div class="card"><div class="line"></div><div class="line"></div><div class="line m"></div><p style="font-size:13px;color:var(--mute);margin-top:10px">— Familia, Sevilla · Junio</p></div>
+    </div>
+    <div class="note"><b>Opiniones.</b> Citas cortas con permiso y un enlace a todas las reseñas de la plataforma. En móvil van en carrusel.</div>
+  </div>
+</section>
+
+<!-- 9. FAQ -->
+<section id="faq">
+  <div class="wrap" style="max-width:760px">
+    <div class="tag">Preguntas frecuentes</div>
+    <h2>Antes de reservar</h2>
+    <details open><summary>¿A qué hora es la entrada y la salida?</summary><div class="line m"></div></details>
+    <details><summary>¿Se admiten mascotas?</summary></details>
+    <details><summary>¿Hay aparcamiento?</summary></details>
+    <details><summary>¿Necesito coche?</summary></details>
+    <details><summary>¿Hay cuna y trona?</summary></details>
+    <details><summary>¿Cuál es la estancia mínima?</summary></details>
+    <details><summary>¿Cómo es el viento en Zahora?</summary></details>
+    <div class="note"><b>FAQ.</b> Acordeón marcado con schema.org FAQPage para Google. Responde lo que hoy se pregunta por mensaje.</div>
+  </div>
+</section>
+
+<!-- 10. RESERVAR -->
+<section id="reservar" class="book">
+  <div class="wrap">
+    <div class="tag">Reservar</div>
+    <h2>Elige cómo reservar</h2>
+    <p style="color:var(--mute)">Consulta la disponibilidad y reserva en tu plataforma preferida o escríbenos directamente.</p>
+    <div class="channels">
+      <div class="channel primary"><div class="logo-ph"></div><h3>Reserva directa</h3><p style="font-size:13px;color:var(--mute)">Escríbenos por WhatsApp o email con tus fechas</p><a class="btn">WhatsApp</a></div>
+      <div class="channel"><div class="logo-ph"></div><h3>Vrbo</h3><p style="font-size:13px;color:var(--mute)">XX opiniones<span class="tbc">*</span></p><a class="btn ghost">Ver en Vrbo</a></div>
+      <div class="channel"><div class="logo-ph"></div><h3>Airbnb<span class="tbc">*</span></h3><p style="font-size:13px;color:var(--mute)">Si está publicada</p><a class="btn ghost">Ver en Airbnb</a></div>
+      <div class="channel"><div class="logo-ph"></div><h3>Booking<span class="tbc">*</span></h3><p style="font-size:13px;color:var(--mute)">Si está publicada</p><a class="btn ghost">Ver en Booking</a></div>
+    </div>
+    <div class="ph" style="height:120px;margin-top:24px"><span>FASE 2 · Calendario de disponibilidad de solo lectura (iCal de las plataformas)</span></div>
+    <div class="note"><b>Conversión.</b> Cada botón abre la plataforma en una pestaña nueva y se registra como evento en la analítica. El WhatsApp lleva el mensaje predefinido con fechas y personas. El orden y los canales los decide el propietario.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div><div class="logo" style="color:var(--ink)">Casa Oliari</div><p>Zahora · Barbate · Cádiz</p>
+        <div class="reg">Nº registro turístico: VUT/CA/XXXXX<span class="tbc">*</span> · Nº registro único: XXXXX<span class="tbc">*</span></div></div>
+      <div><p><b>Contacto</b></p><p>WhatsApp · Email · Instagram</p></div>
+      <div><p><b>Legal</b></p><p>Aviso legal · Privacidad · Cookies</p><p>ES · EN · DE</p></div>
+    </div>
+    <div class="note"><b>Obligatorio.</b> El número de registro de Andalucía tiene que aparecer en toda la publicidad, también en esta web.</div>
+  </div>
+</footer>
+
+<!-- FLOATING -->
+<div class="wa">WA</div>
+<div class="mbar"><div style="font-size:13px"><b>Casa Oliari</b><br><span style="color:var(--mute)">Zahora · desde XX €/noche<span class="tbc">*</span></span></div><a class="btn" href="#reservar">Disponibilidad</a></div>
+
+<script>
+  document.getElementById('tg').addEventListener('change',e=>document.body.classList.toggle('hide-notes',!e.target.checked));
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+---
+import Icon from './Icon.astro';
+import { casa } from '../data/casa';
+import type { Textos } from '../i18n/es';
+interface Props { t: Textos }
+const { t } = Astro.props;
+// Idiomas: EN y DE se activarán cuando existan sus traducciones (src/i18n/en.ts, de.ts)
+const idiomas = [
+  { code: 'es', label: 'ES', href: '/' },
+  { code: 'en', label: 'EN', href: null },
+  { code: 'de', label: 'DE', href: null },
+];
+---
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="logo" href="#top" translate="no"><Icon name="olive" />{casa.nombre}</a>
+    <nav class="nav" aria-label={t.ui.navPrincipal}>
+      {t.nav.map((n) => <a href={n.href}>{n.label}</a>)}
+    </nav>
+    <div class="header-actions">
+      <nav class="lang" aria-label={t.ui.navIdioma}>
+        {idiomas.map((i) =>
+          i.href
+            ? <a href={i.href} hreflang={i.code} lang={i.code} aria-current={i.code === t.lang ? 'true' : undefined}>{i.label}</a>
+            : <span class="lang-soon" lang={i.code} title="Próximamente">{i.label}</span>
+        )}
+      </nav>
+      <a class="btn btn-primary" href="#reservar">{t.ui.consultar}</a>
+    </div>
+  </div>
+</header>

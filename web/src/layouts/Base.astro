@@ -1,0 +1,93 @@
+---
+import '@fontsource-variable/fraunces/full.css';
+import '@fontsource-variable/dm-sans/opsz.css';
+import '../styles/global.css';
+import frauncesLatin from '@fontsource-variable/fraunces/files/fraunces-latin-full-normal.woff2?url';
+import dmSansLatin from '@fontsource-variable/dm-sans/files/dm-sans-latin-opsz-normal.woff2?url';
+import { getImage } from 'astro:assets';
+import Icons from '../components/Icons.astro';
+import Icon from '../components/Icon.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { casa, whatsappUrl } from '../data/casa';
+import { foto } from '../lib/fotos';
+import type { Textos } from '../i18n/es';
+
+interface Props { t: Textos }
+const { t } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const og = await getImage({ src: foto('hero-casa'), width: 1200, format: 'jpg', quality: 80 });
+const ogUrl = new URL(og.src, Astro.site);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'VacationRental',
+  name: casa.nombre,
+  description: t.meta.description,
+  url: canonical.href,
+  image: ogUrl.href,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: casa.localidad,
+    addressRegion: casa.provincia,
+    addressCountry: casa.pais,
+  },
+  containsPlace: {
+    '@type': 'Accommodation',
+    additionalType: 'EntirePlace',
+    numberOfBedrooms: casa.capacidad.dormitorios,
+    numberOfBathroomsTotal: casa.capacidad.banos,
+    occupancy: { '@type': 'QuantitativeValue', maxValue: casa.capacidad.huespedes },
+  },
+};
+---
+<!doctype html>
+<html lang={t.lang}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{t.meta.title}</title>
+  <meta name="description" content={t.meta.description}>
+  <link rel="canonical" href={canonical.href}>
+  <meta name="theme-color" content="#F7F7F4">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={t.meta.title}>
+  <meta property="og:description" content={t.meta.description}>
+  <meta property="og:url" content={canonical.href}>
+  <meta property="og:image" content={ogUrl.href}>
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href={dmSansLatin} as="font" type="font/woff2" crossorigin>
+  <script is:inline>document.documentElement.classList.add('js')</script>
+  <slot name="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</head>
+<body>
+  <a class="skip" href="#contenido">{t.ui.skip}</a>
+  <Icons />
+  <Header t={t} />
+  <main id="contenido">
+    <slot />
+  </main>
+  <Footer t={t} />
+
+  <a class="wa-float" href={whatsappUrl()} aria-label={t.ui.escribirWhatsapp}><Icon name="chat" /></a>
+  <div class="mobile-bar">
+    <div><b translate="no">{casa.nombre}</b><small>{casa.localidad}, {casa.provincia}</small></div>
+    <a class="btn btn-primary" href="#reservar">{t.ui.consultarCorto}</a>
+  </div>
+
+  <script>
+    // Animación de entrada del arco (la única automática) y línea de la cabecera al hacer scroll
+    const root = document.documentElement;
+    requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('loaded')));
+    const header = document.querySelector('.site-header');
+    const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
+</body>
+</html>

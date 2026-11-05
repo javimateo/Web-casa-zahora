@@ -1,0 +1,56 @@
+---
+import Icon from './Icon.astro';
+import { casa } from '../data/casa';
+import type { Textos } from '../i18n/es';
+interface Props { t: Textos; poster: string }
+const { t, poster } = Astro.props;
+const h = t.hero;
+const c = casa.capacidad;
+---
+<section class="hero" aria-labelledby="titulo">
+  <div class="wrap">
+    <div class="hero-text">
+      <h1 id="titulo">{h.titulo}</h1>
+      <p class="lead">{h.lead}</p>
+      <ul class="facts" aria-label={h.datosLabel}>
+        <li><Icon name="users" /><span class="nowrap">{c.huespedes} {h.huespedes}</span>{!c.confirmado && <span class="tbc" title={t.ui.porConfirmar}>*</span>}</li>
+        <li><Icon name="bed" /><span class="nowrap">{c.dormitorios} {h.dormitorios}</span></li>
+        <li><Icon name="bath" /><span class="nowrap">{c.banos} {h.banos}</span></li>
+        <li><Icon name="leaf" />{h.jardin}</li>
+        <li><Icon name="waves" /><span class="nowrap">{h.playa} {casa.distanciaPlaya.replace(' ', ' ')}</span></li>
+      </ul>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#reservar">{t.ui.consultar}</a>
+        <a class="btn btn-ghost" href="#galeria">{t.ui.verFotos}</a>
+      </div>
+    </div>
+    <figure class="arch">
+      <video id="heroVideo" autoplay muted loop playsinline preload="metadata" width="1080" height="1920"
+             poster={poster} aria-label={h.videoAlt}>
+        <source src="/video/jardin.mp4" type="video/mp4" />
+      </video>
+      <button class="media-toggle" id="videoToggle" type="button" aria-label={t.ui.pausar}
+              data-pausar={t.ui.pausar} data-reproducir={t.ui.reproducir}><Icon name="pause" /></button>
+    </figure>
+  </div>
+</section>
+
+<script>
+  // Vídeo de portada: botón de pausa y respeto a "reducir movimiento"
+  const video = document.getElementById('heroVideo') as HTMLVideoElement | null;
+  const toggle = document.getElementById('videoToggle') as HTMLButtonElement | null;
+  if (video && toggle) {
+    const setToggle = (playing: boolean) => {
+      toggle.setAttribute('aria-label', (playing ? toggle.dataset.pausar : toggle.dataset.reproducir) ?? '');
+      toggle.querySelector('use')?.setAttribute('href', playing ? '#i-pause' : '#i-play');
+    };
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      video.removeAttribute('autoplay');
+      video.pause();
+      setToggle(false);
+    }
+    toggle.addEventListener('click', () => {
+      if (video.paused) { video.play(); setToggle(true); } else { video.pause(); setToggle(false); }
+    });
+  }
+</script>

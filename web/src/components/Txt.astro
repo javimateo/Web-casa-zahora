@@ -1,0 +1,7 @@
+---
+// Pinta un texto; si termina en "*" añade el asterisco de "por confirmar".
+import { tbc } from '../lib/fotos';
+interface Props { t: string }
+const { texto, tbc: pendiente } = tbc(Astro.props.t);
+---
+{texto}{pendiente && <span class="tbc" title="Dato por confirmar">*</span>}

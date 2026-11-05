@@ -1,0 +1,412 @@
+{
+  "fachada-jardin-vertical": {
+    "origen": "foto_25.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 1067,
+        "kb": 185
+      },
+      {
+        "w": 1600,
+        "h": 2133,
+        "kb": 719
+      }
+    ]
+  },
+  "hero-casa": {
+    "origen": "foto_25.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 1000,
+        "kb": 143
+      },
+      {
+        "w": 1200,
+        "h": 1500,
+        "kb": 316
+      },
+      {
+        "w": 1600,
+        "h": 2001,
+        "kb": 513
+      }
+    ]
+  },
+  "jardin-hamaca": {
+    "origen": "foto_29.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 218
+      },
+      {
+        "w": 1600,
+        "h": 1200,
+        "kb": 736
+      }
+    ]
+  },
+  "jardin-olivos": {
+    "origen": "foto_04.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 130
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "kb": 214
+      }
+    ]
+  },
+  "salon-chimenea": {
+    "origen": "foto_15.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 43
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "kb": 55
+      }
+    ]
+  },
+  "terraza-pergola": {
+    "origen": "foto_05.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 138
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "kb": 214
+      }
+    ]
+  },
+  "playa-arena": {
+    "origen": "foto_27.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 29
+      },
+      {
+        "w": 1600,
+        "h": 1200,
+        "kb": 91
+      }
+    ]
+  },
+  "entrada-cartel": {
+    "origen": "foto_08.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 110
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "kb": 182
+      }
+    ]
+  },
+  "fachada-jardin": {
+    "origen": "foto_09.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 98
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "kb": 160
+      }
+    ]
+  },
+  "terraza-tumbonas": {
+    "origen": "foto_01.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 101
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "kb": 160
+      }
+    ]
+  },
+  "jardin-cesped": {
+    "origen": "foto_11.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 145
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "kb": 247
+      }
+    ]
+  },
+  "jardin-camino": {
+    "origen": "foto_20.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 160
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "kb": 269
+      }
+    ]
+  },
+  "pergola-buganvilla": {
+    "origen": "foto_14.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 161
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "kb": 257
+      }
+    ]
+  },
+  "terraza-sombra": {
+    "origen": "foto_23.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 533,
+        "kb": 56
+      },
+      {
+        "w": 1200,
+        "h": 800,
+        "kb": 105
+      }
+    ]
+  },
+  "mesa-terraza": {
+    "origen": "foto_07.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 132
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "kb": 206
+      }
+    ]
+  },
+  "vista-dron": {
+    "origen": "foto_22.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 147
+      },
+      {
+        "w": 1600,
+        "h": 1200,
+        "kb": 506
+      }
+    ]
+  },
+  "desayuno-terraza": {
+    "origen": "foto_28.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 853,
+        "kb": 156
+      },
+      {
+        "w": 1600,
+        "h": 1706,
+        "kb": 468
+      }
+    ]
+  },
+  "salon-sofa": {
+    "origen": "foto_21.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 534,
+        "kb": 30
+      },
+      {
+        "w": 1600,
+        "h": 1067,
+        "kb": 84
+      }
+    ]
+  },
+  "salon-ventana": {
+    "origen": "foto_26.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 534,
+        "kb": 32
+      },
+      {
+        "w": 1600,
+        "h": 1067,
+        "kb": 89
+      }
+    ]
+  },
+  "cocina": {
+    "origen": "foto_13.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 533,
+        "kb": 32
+      },
+      {
+        "w": 1024,
+        "h": 683,
+        "kb": 44
+      }
+    ]
+  },
+  "cocina-comedor": {
+    "origen": "foto_12.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 533,
+        "kb": 22
+      },
+      {
+        "w": 1024,
+        "h": 683,
+        "kb": 31
+      }
+    ]
+  },
+  "bano-ducha": {
+    "origen": "foto_06.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 1200,
+        "kb": 28
+      },
+      {
+        "w": 1024,
+        "h": 1536,
+        "kb": 40
+      }
+    ]
+  },
+  "bano-banera": {
+    "origen": "foto_02.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 1200,
+        "kb": 26
+      },
+      {
+        "w": 1024,
+        "h": 1536,
+        "kb": 37
+      }
+    ]
+  },
+  "playa-atardecer": {
+    "origen": "foto_24.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 48
+      },
+      {
+        "w": 1600,
+        "h": 1200,
+        "kb": 157
+      }
+    ]
+  },
+  "dunas-pasarela": {
+    "origen": "foto_30.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 95
+      },
+      {
+        "w": 1600,
+        "h": 1200,
+        "kb": 367
+      }
+    ]
+  },
+  "atardecer": {
+    "origen": "foto_31.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 600,
+        "kb": 21
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "kb": 32
+      }
+    ]
+  },
+  "fachada-sombra": {
+    "origen": "foto_33.jpg",
+    "versiones": [
+      {
+        "w": 800,
+        "h": 533,
+        "kb": 89
+      },
+      {
+        "w": 1200,
+        "h": 800,
+        "kb": 201
+      }
+    ]
+  }
+}

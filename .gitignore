@@ -1,0 +1,20 @@
+# Dependencias y compilados
+node_modules/
+web/dist/
+web/.astro/
+__pycache__/
+*.pyc
+
+# Secretos y configuración local
+.env
+.env.*
+.claude/settings.local.json
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Vídeos originales: solo se versiona el que usa la web (el resto pesa ~44 MB y no se usa)
+img/videos/*
+!img/videos/video_01.mp4

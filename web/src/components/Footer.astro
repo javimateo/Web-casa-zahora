@@ -1,0 +1,44 @@
+---
+import Icon from './Icon.astro';
+import Txt from './Txt.astro';
+import { casa, whatsappUrl } from '../data/casa';
+import type { Textos } from '../i18n/es';
+interface Props { t: Textos }
+const { t } = Astro.props;
+const { registro, contacto } = casa;
+const contactos = [
+  [whatsappUrl(), 'WhatsApp'],
+  [contacto.email ? `mailto:${contacto.email}` : '#', 'Email'],
+  [contacto.instagram ? `https://www.instagram.com/${contacto.instagram}` : '#', 'Instagram'],
+];
+---
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="#top" translate="no"><Icon name="olive" />{casa.nombre}</a>
+        <p>{t.pie.descripcion}</p>
+      </div>
+      {t.pie.columnas.map((col) => (
+        <div>
+          <h2 class="footer-title">{col.titulo}</h2>
+          <ul>{col.enlaces.map(([href, label]) => <li><a href={href}>{label}</a></li>)}</ul>
+        </div>
+      ))}
+      <div>
+        <h2 class="footer-title">{t.pie.contacto}</h2>
+        <ul>{contactos.map(([href, label]) => <li><a href={href}>{label}</a></li>)}</ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>{t.pie.registroTuristico}: <Txt t={registro.turisticoAndalucia || 'VUT/CA/XXXXX*'} /></span>
+      <span>{t.pie.registroUnico}: <Txt t={registro.unicoArrendamiento || 'XXXXX*'} /></span>
+      <span>
+        {t.pie.legal.map(([href, label], i) => (
+          <>{i > 0 && (i === t.pie.legal.length - 1 ? ' y ' : ', ')}<a href={href}>{label}</a></>
+        ))}
+      </span>
+      <span><span class="tbc">*</span> {t.ui.notaPorConfirmar}</span>
+    </div>
+  </div>
+</footer>

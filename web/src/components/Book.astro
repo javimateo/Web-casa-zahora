@@ -1,0 +1,38 @@
+---
+import Foto from './Foto.astro';
+import Icon from './Icon.astro';
+import Txt from './Txt.astro';
+import { casa, whatsappUrl } from '../data/casa';
+import type { Textos } from '../i18n/es';
+interface Props { t: Textos }
+const { t } = Astro.props;
+const r = t.reservar;
+---
+<section class="book" id="reservar" aria-labelledby="t-res">
+  <div class="wrap">
+    <figure class="book-photo"><Foto src={r.foto.src} alt={r.foto.alt} sizes="40vw" widths={[600, 1200]} /></figure>
+    <div>
+      <h2 id="t-res">{r.titulo}</h2>
+      <p class="lead">{r.lead}</p>
+      <div class="direct">
+        <a class="btn" href={whatsappUrl()}><Icon name="chat" />{t.ui.escribirWhatsapp}</a>
+        <p>{r.directo}</p>
+      </div>
+      <ul class="platforms" aria-label={r.plataformasLabel}>
+        {casa.plataformas.map((p, i) => {
+          const meta = i === 0 ? r.opiniones.replace('{total}', casa.valoracion.total || 'XX') : r.sinPublicar;
+          return (
+            <li>
+              <a href={p.url || '#'} target="_blank" rel="noopener">
+                <span class="name">{p.nombre}</span>
+                <span class="meta"><Txt t={p.confirmado ? meta.replace(/\*$/, '') : meta} /></span>
+                <Icon name="ext" /><span class="sr-only"> {t.ui.nuevaPestana}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+      <p class="book-note">{r.nota}</p>
+    </div>
+  </div>
+</section>
